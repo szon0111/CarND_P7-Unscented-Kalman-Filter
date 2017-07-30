@@ -48,10 +48,10 @@ UKF::UKF() {
   P_ = MatrixXd(5, 5);
 
   // Process noise standard deviation longitudinal acceleration in m/s^2
-  std_a_ = 3;
+  std_a_ = 2.5;
 
   // Process noise standard deviation yaw acceleration in rad/s^2
-  std_yawdd_ = .3;
+  std_yawdd_ = .6;
 
   // Laser measurement noise standard deviation position1 in m
   std_laspx_ = 0.15;
@@ -88,11 +88,11 @@ void UKF::ProcessMeasurement(MeasurementPackage meas_package) {
     x_ << 0, 0, 0, 0, 0;
 
     // initialize covariance matrix
-    P_ << 1, 0, 0, 0, 0,
-            0, 1, 0, 0, 0,
-            0, 0, 1, 0, 0,
-            0, 0, 0, 1, 0,
-            0, 0, 0, 0, 1;
+    P_ << 0.1, 0, 0, 0, 0,
+            0, 0.1, 0, 0, 0,
+            0, 0, 0.1, 0, 0,
+            0, 0, 0, 0.1, 0,
+            0, 0, 0, 0, 0.1;
 
     if (meas_package.sensor_type_ == MeasurementPackage::LASER && use_laser_) {
       /**
